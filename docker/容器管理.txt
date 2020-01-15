@@ -1,0 +1,34 @@
+
+
+容器管理常用选项
+
+docker container run -itd --name bs busybox
+
+docker container attach bs
+
+docker container start bs
+
+ctrl + p + q
+
+docker exec -it bs1 sh
+
+
+docker container run -itd -p 8080:80 --name nginx01 nginx
+
+
+docker logs nginx01
+
+docker container run -itd -p 8080:80 --name nginx02 --restart=always nginx01 nginx
+
+docker container run -itd --memory 512m --name nginx04 nginx
+
+docker container stats nginx05
+
+
+
+
+
+
+
+
+

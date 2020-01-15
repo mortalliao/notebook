@@ -1,0 +1,50 @@
+
+防火墙设置
+
+安装: yum install firewalld
+启动: service firewalld start
+检查状态: service firewalld status
+关闭或禁用防火墙: service firewalld stop/disable
+
+
+firewall-cmd -version
+
+firewall-cmd --help
+
+firewall-cmd --state
+
+firewall-cmd --get-zones
+
+firewall-cmd --get-default-zone
+
+firewall-cmd --list-all-zones
+
+firewall-cmd --zone=public
+
+
+
+firewall-cmd --query-service=ssh
+
+firewall-cmd --remove-service=ssh
+
+firewall-cmd --add-service=ssh
+
+
+firewall-cmd --list-ports
+
+firewall-cmd --query-port=22/tcp
+
+firewall-cmd --add-port=22/tcp
+
+firewall-cmd --remove-port=22/tcp
+
+
+sudo service firewalld stop
+
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+
+例如: 在服务器日志fresh.log中, 找到所有报错的日期
+
+sed -n '/Error/p' fresh.log | awk '{print $1}'
+
+
+grep 查找
+sed  行编辑器
+awk  文本处理工具
+
+
+
+正则
+
+如何表示字符 -> 如何组成表达式
+
+
+sed
+
+理解行处理的原理
+格式
+基本的行处理命令
+
+
+
+awk
+
+行处理方式与格式
+
+处理方式
+awk一次处理一行内容
+awk对每行可以切片处理
+awk '{print $1}' #输出首个单词
+
+格式
+命令行格式
+基本格式
+awk [options] 'command' file(s)
+    commond: pattern{awk操作命令}
+    pattern: 正则表达式, 逻辑判断式
+
+    commond1:pattern{awk操作命令}
+    操作命令:内置函数:print() printf() getline..;
+             控制指令:if(){...}else{...}; while(){...};
+扩展格式
+
+
+脚本格式
+awk -f awk-script-file file(s)
+
+
+常用的内嵌参数
+awk内置变量1
+    $0 : 表示整个当前行
+    $1 : 每行第一个字段
+    $2 : 每行第二个字段
+    ...
+awk内置参数: 分割符
+    options: -F field-separator(默认为空格)
+    例如: $awk -F ':' '{print $1,$3}' /etc/passwd
+          $awk -F ':' '{print $1" "$3}' /etc/passwd
+          $awk -F ':' '{print $1"\t"$3}' /etc/passwd
+          $awk -F ':' '{print "User:"$1"\t ""UID:"$3}' /etc/passwd
+awk内置变量2
+    NR : 每行的记录号
+    NF : 字段数量变量
+    FILENAME : 正在处理的文件名
+    例如: $awk -F ':' '{print NR,NF}' /etc/passwd
+
+案例一
+显示/etc/passwd每行的行号, 每行的列数, 对应行的用户名(print, printf)
+awk -F ':' '{print "Line: "NR, "Col: "NF,"User:"$1}' passwd
+awk -F ':' '{printf("Line:%s Col:%s User:%s\n",NR,NF,$1)}' passwd
+
+案例二
+显示/etc/passwd中用户ID大于100的行号和用户名(if...else...)
+awk -F ':' '{if ($3>100) print "Line: "NR,"User: "$1}' passwd
+
+案例三
+在服务器log中找出'Error'的发生日期
+sed '/Error/p' fresh.log | awk '{print $1}' 
+awk '/Error/{print $1}' fresh.log
+
+逻辑判断式
+command:pattern {awk操作命令}
+pattern:正则表达式;逻辑判断式
+
+awk逻辑
+~, !~ : 匹配正则表达式
+==, !=, <, > : 判断逻辑表达式
+
+
+内嵌程序的应用
+
+
+
+
+
+
+
+
+
+

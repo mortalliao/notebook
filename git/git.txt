@@ -1,0 +1,111 @@
+
+git --version
+
+
+git config --global user.name 'your_name'
+git config --global user.email 'your_email@domain.com'
+
+
+缺省等同于 local
+git config --local      # local只对某个仓库有效
+git config --global     # global对当前用户所有仓库有效
+git config --system     # system对系统所有登录的用户有效
+
+
+显示config的配置, 加 --list
+git config --list --local
+git config --list --global
+git config --list --system
+
+
+
+
+两种场景
+1. 把已有的项目代码纳入Git管理
+```
+cd 项目代码所在的文件夹
+git init
+```
+
+2. 新建的项目直接用Git管理
+```
+git init your_project   # 会在当前路径下创建和项目名称同名的文件夹
+cd your_project
+```
+
+git commit -am"Add test"
+
+
+git log
+git log --oneline
+git log -n4 --oneline
+git log --all --graph
+git log temp
+
+
+git status
+
+git mv readme readme.md
+
+git branch -v
+git branch -av
+
+git checkout -b temp sha1Id
+
+git help --web log
+
+gitk
+
+
+cat .git/HEAD
+cat .git/config
+
+git cat-file -t sha1Id
+git cat-file -p sha1Id
+
+
+commit  tree    blob
+
+
+git branch branch_name sha1Id
+
+
+
+HEAD可以指向commit或者branch
+
+git checkout -b branch_name2 branch_name1  #基于branch_name1创建branch_name2
+
+
+分支也是落脚于某个commit
+
+
+git diff sha1Id sha2Id
+
+
+git diff HEAD HEAD^1^1   # HEAD父亲的父亲   HEAD^^   HEAD~2
+
+
+git diff HEAD HEAD^  # HEAD^1 =  HEAD~1
+
+
+
+git branch -D branch_name
+
+
+
+
+
+
+git commit --amend   # 对最近一次提交的message做变更
+
+
+
+git rebase -i sha1Id
+
+git rebase --continue
+
+
+gitk --all
+
+
+

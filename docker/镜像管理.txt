@@ -1,0 +1,70 @@
+
+镜像与容器联系和存储驱动
+
+镜像管理常用命令
+
+docker --help
+
+Management Commands:
+    config
+    container
+    image
+    network
+    node
+    plugin
+    secret
+    service
+    stack
+    swarm
+    system
+    trust
+    volume
+
+
+docker image --help
+
+docker images
+
+docker image ls
+
+docker image build
+
+docker image history busybox
+
+docker image inspect nginx:1.12
+
+docker image pull nginx:1.11
+
+docker image push 
+
+docker image rm nginx:1.12
+
+docker tag nginx:1.11 nginx:v1
+
+### 保存镜像
+docker image save nginx:1.11 > nginx1.11.tar
+
+du -sh nginx1.11.tar
+
+docker load < nginx1.11.tar
+
+
+### 导出容器 
+docker ps
+
+docker run -itd busybox
+
+docker export sha1Id busybox.tar  
+
+
+### 导入容器
+docker image import busybox.tar busybox:self
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+
+服务器硬件资源信息
+
+内存: free -m
+
+硬盘: df -h
+
+负载: w 或 top
+
+cpu个数和核数: cat /proc/cpuinfo
+
+格式化磁盘: fdisk
+
+

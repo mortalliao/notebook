@@ -1,0 +1,96 @@
+
+SSH工具
+
+
+
+
+
+SSH端口安全
+
+个性化脚本一键登录服务器
+
+
+
+SSH : Secure Shell 安全外壳协议
+
+服务器安装SSH服务
+
+安装SSH
+yum install openssh-server
+
+启动SSH
+service sshd start
+
+设置开机运行
+chkconfig sshd on
+
+
+### 免密码登录 方案之 SSH Key
+- ssh key 使用非对称加密方式生成公钥 和 密钥
+- 私钥存放在本地~/.ssh目录
+- 公钥可以对外公开, 放在服务器的~/.ssh/authorized_keys
+
+ssh-keygen -t rsa
+ssh-keygen -t dsa
+
+touch autorized_keys
+vim autorized_keys
+
+
+ssh-add ~/.ssh/mogo_rsa
+
+
+
+
+
+
+
+### SSH config用法详解
+
+config为了方便我们批量管理多个ssh
+
+config存放在~/.ssh/config
+
+config配置语法
+
+
+SSH config语法关键字
+
+Host 别名
+HostName 主机名
+Port    端口
+User    用户名
+IdentityFile    密钥文件的路径
+
+
+ssh root@192.168.0.106
+
+cd ~/.ssh/
+
+touch config
+
+vim config
+```
+host "mogo"
+    HostName 192.168.0.106
+    User    root
+    Port    22
+    IdentityFile    
+```
+
+ssh mogo
+
+cat config
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+
+文件操作命令
+
+软件包管理器: yum
+安装软件: yum install xxx
+卸载软件: yum remove xxx
+搜索软件: yum search xxx
+清理缓存: yum clean package
+列出已安装: yum list
+软件包信息: yum info xxx
+
+
+
+
+Linux文件的目录结构
+
+    根目录 /
+    家目录 /home
+    临时目录 /tmp 
+    配置目录 /etc
+    用户程序目录 /usr
+
+
+文件基本操作
+
+ls
+touch
+mkdir
+cd
+rm
+cp
+mv
+pwd
+
+
+mkdir -p dir/test1/test2
+
+rm -r dir
+
+vim
+
+r 4
+w 2
+X 1
+
+tail
+head
+cat
+more 分页
+less 可控分页
+grep 搜索关键字
+find 查找文件
+wc   统计个数
+
+
+grep -n "11" file.txt
+
+cat file.txt | wc -l
+
+
+
+文件搜索, 查找, 读取
+
+find /etc/networks
+find /etc/sysconfig
+find . -name "*.c"
+find . -name "*ooc"
+find /etc/ -name "*.conf"
+find . -type f #文件
+find . -type d #文件夹
+find . -ctime -20 #20天内更新过的文件列出
+find /var/log -type f -mtime +7
+
+
+
+
+文件权限 421
+
+
+
+文件压缩与解压
+
+tar -cfzv archive.tar foo bar # z gz  v 可视化
+
+tar -tvf archive.tar
+
+tar -xf archive.tar
+
+
+
+
+
+
+
+
+
+
+
+
+
