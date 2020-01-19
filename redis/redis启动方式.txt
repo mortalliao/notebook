@@ -1,0 +1,35 @@
+
+三种启动方法
+
+最简启动 redis-server (默认6379)
+
+动态参数启动 redis-server --port 6380
+
+配置文件启动 redis-server configPath
+
+redis-cli -h ip -p port | ping
+ps -ef | grep redis
+netstat -antpl | grep redis
+
+生产环境选择配置启动
+单机多实例配置文件可以用端口区分开
+
+客户端连接
+    redis-cli -h ip -p port
+
+Redis客户端返回值
+    状态回复 ping PONG
+    错误回复 hget hello field (error)WRONGTYPE Operation against
+    整数回复 incr hello (integer) 1
+    字符串回复 get hello  "world"
+    多行字符串回复 mget hello foo  1)"world" 2)"bar"
+
+Redis常用配置
+    daemonize   是否是守护进程(no|yes)  (默认no, 建议yes)
+    port        对外端口
+    logfile     日志文件名
+    dir         工作目录
+
+
+config get *
+

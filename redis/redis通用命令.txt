@@ -1,0 +1,11 @@
+
+通用命令
+
+O(n)    keys    keys * #遍历所有key  key [pattern] (he* he[h-l]* ph?)
+O(1)    dbsize  #计算key的总数
+O(1)    exists key  #
+
+
+
+
+

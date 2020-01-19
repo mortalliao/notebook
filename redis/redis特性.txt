@@ -1,0 +1,53 @@
+
+Redis特性
+
+1. 速度快
+
+2. 持久化 保持在内存中, 对数据更新异步报错在磁盘中
+    RDB
+    AOF
+
+3. 数据结构
+key "Plain Text String" Strings/Blobs/Bitmaps
+    key1    val1
+    key2    val2        Hash Tables(Objects!)
+    C B B A C           Linked Lists
+    A B C D             sets
+    A:0.1 B:0.3 C:500   Sorted Sets
+
+4. 多语言客户端
+
+5. 功能丰富
+    发布订阅
+    Lua脚本
+    事务
+    pipeline
+    BitMaps 位图
+    HyperLogLog 超小内存唯一值计数 12K
+    GEO 地理信息定位
+
+6. 简单
+    23000行代码
+    不依赖外部库(like libevent)
+    单线程模型
+ 
+ 7. 主从复制
+
+    主服务器 <- 复制  从服务器
+             <- 复制  从服务器
+             <- 复制  从服务器
+
+8. 高可用, 分布式
+    高可用  Redis-Sentinel(v2.8)支持高可用
+    分布式  Redis-Cluster(v3.0)支持分布式
+
+
+应用场景
+    缓存系统
+    计数器
+    消息队列系统
+    排行榜
+    社交网络
+    实时系统
+    Boolean过滤器
+
