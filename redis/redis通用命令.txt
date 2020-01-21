@@ -2,10 +2,65 @@
 通用命令
 
 O(n)    keys    keys * #遍历所有key  key [pattern] (he* he[h-l]* ph?)
+O(1)    type key    #返回key的类型 string hash list set zset(不存在的key返回none)
 O(1)    dbsize  #计算key的总数
-O(1)    exists key  #
+O(1)    exists key  #检查key是否存在    存在1 不存在0
+O(1)    del key [key...]    #删除指定key-value
+O(1)    expire key seconds #key在seconds秒后过期(-2代表key不存在, -1代表key存在并且没有过期)
+O(1)    ttl key     #查看key剩余的过期时间
+O(1)    persist key #去掉key的过期时间
 
 
+       数据结构 内部编码
+        string  raw
+                int
+                embstr
+key
+        hash    hashtable
+                ziplist
+        
+        list    linkedlist
+                ziplist
 
+        set     hashtable
+                intset
+
+        zset    skiplist
+                ziplist
+
+
+redisObject
+
+数据类型(type)  string
+                hash
+                list
+                set
+                sorted set
+
+编码方式(encoding) raw
+                   int
+                   ziplist
+                   linkedlist
+                   hashmap
+                   intset
+
+数据指针(ptr)
+虚拟内存(vm)
+其他信息
+
+
+单线程为什么这么快?
+1. 纯内存(主要原因)
+2. 非阻塞IO
+3. 避免线程切换和竟态消耗
+
+注意事项:
+1. 一次只运行一条命令
+2. 拒绝长(慢)命令
+    keys, flushall, flushdb, show lua script, multi/exec
+    operate big value(collection)
+3. 其实不是单线程
+    fsync file descriptor
+    close file descriptor
 
 
