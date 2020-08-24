@@ -1,0 +1,153 @@
+
+IO
+面向流(Stream Oriented)
+阻塞IO(Blocking IO)
+
+NIO
+面向缓存区(Buffer Oriented)
+非阻塞IO(No Blocking IO)
+选择器(Selector)
+
+
+阻塞IO，指的是需要内核IO操作彻底完成后，才返回到用户空间执行用户的操作。阻塞指的是用户空间程序的执行状态。
+非阻塞IO，指的是用户空间的程序不需要等待内核IO操作彻底完成，可以立即返回用户空间执行用户操作，即处于非阻塞的状态，与此同时内核会立即返回给用户一个状态值。
+
+
+IO
+文件, 磁盘, 网络 -> 输入流 -> 程序 
+                 <- 输出流 <-
+
+
+
+NIO
+文件, 磁盘, 网络 <-> 通道 <-> 程序
+
+
+
+通道(Channel) 和 缓存区(Buffer)
+
+Channel负责传输, Buffer负责存储
+
+
+
+
+## Channel通道
+
+    文件通道
+        FileChannel
+    NIO的非阻塞式网络通信 选择器(Selector)  
+        SocketChannel
+        ServerSocketChannel
+        DatagramChannel
+
+
+    由 java.nio.channels包定义的
+    Channel表示IO源与目标打开的连接, 类似与传统的"流"
+    只不过Channel本身不能直接访问数据, Channel只能与Buffer进行交互
+ 
+    1. 通道(Channel): 用于源节点与目标节点的连接.
+        在Java NIO中负责缓冲区数据的传输, Channel本身不存储数据, 因此需要配合缓冲区进行传输
+
+    2. 通道的主要实现类
+        java.nio.channels.Channel 接口:
+            |-- FileChannel
+            |-- SocketChannel
+            |-- ServerSocketChannel
+            |-- DatagramChannel
+
+    3. 获取通道
+        1. Java 针对支持通道的类提供了 getChannel() 方法
+            本地IO:
+                FileInputStream/FileOutputStream
+                RandomAccessFile
+    
+            网络IO:
+                Socket
+                ServerSocket
+                DatagramSocket
+    
+        2. 在 JDK 1.7 中的NIO.2 针对各个通道提供了静态方法 open()
+    
+        3. 在 JDK 1.7 中的NIO.2 的Files 工具类的 newByteChannel()
+
+    4. 通道之间的数据传输
+        transferForm()
+        transferTo()
+     
+    5. 分散(Scatter)与聚集(Gather)
+        分散读取(Scattering Reads) : 将通道中的数据分散到多个缓冲区中
+        聚集写入(Gathering Writes) : 将多个缓冲区中的数据聚集到通道中
+
+    6. 字符集: Charset
+        编码: 字符串 -> 字节数组
+        解码: 字节数组 -> 字符串
+
+
+
+
+## Buffer缓存区
+
+    1. 在 Java NIO 中负责数据的存取, 缓冲区就是数组, 用于存储不同数据类型的数据
+
+        根据数据类型不同(boolean除外), 提供了相应类型的缓冲区
+            ByteBuffer
+            CharBuffer
+            ShortBuffer
+            IntBuffer
+            LongBuffer
+            FloatBuffer
+            DoubleBuffer
+
+        缓存区的管理方式几乎一样
+        通过 allocate() 获取缓存区
+     
+    2. 缓冲区存取数据的两个核心方法
+        put() :存入数据到缓存区中
+        get() :获取缓存区中的数据
+
+    3. 缓存区中的四个核心属性
+        Invariants: mark <= position <= limit <= capacity
+        private int mark = -1;
+        private int position = 0;
+        private int limit;
+        private int capacity;
+
+        capacity  : 容量, 表示缓冲区中最大存储数据的容量, 一旦声明不能改变
+        limit     : 界限, 表示缓冲区中可以操作数据的大小, (limit 后数据不能进行读写的)
+        position  : 位置, 表示缓存区中正在操作数据的位置
+
+        mark      : 标记, 表示记录当前position的位置, 可以通过reset()恢复到mark的位置
+
+        position <= limit <= capacity
+
+    4. 直接缓冲区 与 非直接缓冲区
+        非直接缓冲区: 通过allocate() 方法分配缓冲区, 将缓冲区建立在JVM的内存中
+        直接缓冲区 :  通过allocateDirect() 方法分配直接缓冲区, 将缓冲区建立在物理内存中, 可以提高效率
+
+
+
+
+## 使用NIO完成网络通信的三个核心:
+
+1. 通道Channel :负责连接
+          java.nio.channels.Channel 接口:
+              |-- SelectableChannel
+                  |-- SocketChannel
+                  |-- ServerSocketChannel
+                  |-- DatagramChannel
+
+                  |-- Pipe.SinkChannel
+                  |-- Pipe.SourceChannel
+
+2. 缓冲区 Buffer :负责数据的存取
+
+3. 选择器 Selector :是SelectableChannel 的多路复用器, 用于监控SelectableChannel的IO状况
+
+
+
+
+
+
+
+
+
